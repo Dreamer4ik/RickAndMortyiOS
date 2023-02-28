@@ -10,7 +10,7 @@ import UIKit
 /// Controller to show and search for Characters
 final class RMCharacterViewController: UIViewController {
     // MARK: - Properties
-    private let characterListView = CharacterListView()
+    private let characterListView = RMCharacterListView()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -20,11 +20,22 @@ final class RMCharacterViewController: UIViewController {
     
     // MARK: - Helpers
     private func configureUI() {
-        view.backgroundColor = .purple
+        view.backgroundColor = .systemBackground
         title = "Characters"
+        characterListView.delegate = self
         
         view.addSubview(characterListView)
         characterListView.addConstraintsToFillViewWithoutSafeArea(view)
     }
     
+}
+
+// MARK: - RMCharacterListViewDelegate
+extension RMCharacterViewController: RMCharacterListViewDelegate {
+    func rmCharacterListView(_ characterListView: RMCharacterListView, didSelectCharacter character: RMCharacter) {
+        let viewModel = RMCharacterDetailViewViewModel(character: character)
+        let vc = RMCharacterDetailViewController(viewModel: viewModel)
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
