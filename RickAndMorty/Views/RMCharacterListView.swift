@@ -34,6 +34,9 @@ final class RMCharacterListView: UIView {
         collectionView.alpha = 0
         collectionView.register(RMCharacterCollectionViewCell.self,
                                 forCellWithReuseIdentifier: RMCharacterCollectionViewCell.identifier)
+        collectionView.register(RMFooterLoadingCollectionReusableView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                                withReuseIdentifier: RMFooterLoadingCollectionReusableView.identifier)
         return collectionView
     }()
     
@@ -46,7 +49,7 @@ final class RMCharacterListView: UIView {
     
     // MARK: - Helpers
     private func configureUI() {
-        backgroundColor = .systemBlue
+        backgroundColor = .systemBackground
         addSubviews(collectionView, spinner)
         spinner.center(inView: self)
         spinner.setDimensions(width: 100, height: 100)
@@ -69,6 +72,12 @@ final class RMCharacterListView: UIView {
 
 // MARK: - RMCharacterListViewViewModelDelegate
 extension RMCharacterListView: RMCharacterListViewViewModelDelegate {
+    func didLoadMoreCharacters(with newIndexPaths: [IndexPath]) {
+        collectionView.performBatchUpdates {
+            self.collectionView.insertItems(at: newIndexPaths)
+        }
+    }
+    
     func didSelectCharacter(_ character: RMCharacter) {
         delegate?.rmCharacterListView(self, didSelectCharacter: character)
     }
