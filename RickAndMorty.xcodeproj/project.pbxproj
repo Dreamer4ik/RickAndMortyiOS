@@ -44,6 +44,9 @@
 		DFCBEEEA29AD272600A0B7B7 /* RMCharacterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCBEEE929AD272600A0B7B7 /* RMCharacterListView.swift */; };
 		DFCBEEED29AD28AE00A0B7B7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCBEEEC29AD28AE00A0B7B7 /* Extensions.swift */; };
 		DFDA0FF529DC958000A9DBD0 /* RMEpisodeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDA0FF429DC958000A9DBD0 /* RMEpisodeDetailViewController.swift */; };
+		DFDA0FF729DC9DEE00A9DBD0 /* RMAPICacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDA0FF629DC9DEE00A9DBD0 /* RMAPICacheManager.swift */; };
+		DFDA0FF929DCA6B200A9DBD0 /* RMEpisodeDetailViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDA0FF829DCA6B200A9DBD0 /* RMEpisodeDetailViewViewModel.swift */; };
+		DFDA0FFB29DCA73000A9DBD0 /* RMEpisodeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDA0FFA29DCA73000A9DBD0 /* RMEpisodeDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +89,9 @@
 		DFCBEEE929AD272600A0B7B7 /* RMCharacterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacterListView.swift; sourceTree = "<group>"; };
 		DFCBEEEC29AD28AE00A0B7B7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DFDA0FF429DC958000A9DBD0 /* RMEpisodeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMEpisodeDetailViewController.swift; sourceTree = "<group>"; };
+		DFDA0FF629DC9DEE00A9DBD0 /* RMAPICacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMAPICacheManager.swift; sourceTree = "<group>"; };
+		DFDA0FF829DCA6B200A9DBD0 /* RMEpisodeDetailViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMEpisodeDetailViewViewModel.swift; sourceTree = "<group>"; };
+		DFDA0FFA29DCA73000A9DBD0 /* RMEpisodeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMEpisodeDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +223,7 @@
 				DF0D0DF829D4A1A5000056CF /* CharacterDetails */,
 				DF0D0DF929D4A1D7000056CF /* Character */,
 				DF27557929AFB079001764DF /* RMFooterLoadingCollectionReusableView.swift */,
+				DFDA0FFA29DCA73000A9DBD0 /* RMEpisodeDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -227,6 +234,7 @@
 				DF0D0E0029D4A2B2000056CF /* CharacterDetail */,
 				DFCBEEE729AD261800A0B7B7 /* RMCharacterListViewViewModel.swift */,
 				DF7EB96D29AE2E84003876D9 /* RMCharacterCollectionViewCellViewModel.swift */,
+				DFDA0FF829DCA6B200A9DBD0 /* RMEpisodeDetailViewViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -245,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				DFBBF78429B0C5F000DA7CB9 /* RMImageLoader.swift */,
+				DFDA0FF629DC9DEE00A9DBD0 /* RMAPICacheManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -378,12 +387,15 @@
 				DF56B721299AC275007F3DBA /* RMLocation.swift in Sources */,
 				DF37EEF9299F88C400DB4756 /* RMEndpoint.swift in Sources */,
 				DFDA0FF529DC958000A9DBD0 /* RMEpisodeDetailViewController.swift in Sources */,
+				DFDA0FFB29DCA73000A9DBD0 /* RMEpisodeDetailView.swift in Sources */,
 				DF56B723299AC28A007F3DBA /* RMCharacter.swift in Sources */,
 				DF7EB96E29AE2E84003876D9 /* RMCharacterCollectionViewCellViewModel.swift in Sources */,
 				DF37EEF7299F878D00DB4756 /* RMRequest.swift in Sources */,
 				DFCBEEE829AD261800A0B7B7 /* RMCharacterListViewViewModel.swift in Sources */,
 				DF0D0DFF29D4A250000056CF /* RMCharacterEpisodeCollectionViewCell.swift in Sources */,
 				DF56B72A299AC37C007F3DBA /* RMCharacterViewController.swift in Sources */,
+				DFDA0FF729DC9DEE00A9DBD0 /* RMAPICacheManager.swift in Sources */,
+				DFDA0FF929DCA6B200A9DBD0 /* RMEpisodeDetailViewViewModel.swift in Sources */,
 				DF3FDB3B29AE90930010662E /* RMCharacterDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
