@@ -43,6 +43,7 @@
 		DFCBEEE829AD261800A0B7B7 /* RMCharacterListViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCBEEE729AD261800A0B7B7 /* RMCharacterListViewViewModel.swift */; };
 		DFCBEEEA29AD272600A0B7B7 /* RMCharacterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCBEEE929AD272600A0B7B7 /* RMCharacterListView.swift */; };
 		DFCBEEED29AD28AE00A0B7B7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCBEEEC29AD28AE00A0B7B7 /* Extensions.swift */; };
+		DFDA0FF529DC958000A9DBD0 /* RMEpisodeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFDA0FF429DC958000A9DBD0 /* RMEpisodeDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		DFCBEEE729AD261800A0B7B7 /* RMCharacterListViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacterListViewViewModel.swift; sourceTree = "<group>"; };
 		DFCBEEE929AD272600A0B7B7 /* RMCharacterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacterListView.swift; sourceTree = "<group>"; };
 		DFCBEEEC29AD28AE00A0B7B7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		DFDA0FF429DC958000A9DBD0 /* RMEpisodeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMEpisodeDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				DF3FDB3829AE8FD80010662E /* RMCharacterDetailViewController.swift */,
+				DFDA0FF429DC958000A9DBD0 /* RMEpisodeDetailViewController.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				DF37EEF5299F877E00DB4756 /* RMService.swift in Sources */,
 				DF56B721299AC275007F3DBA /* RMLocation.swift in Sources */,
 				DF37EEF9299F88C400DB4756 /* RMEndpoint.swift in Sources */,
+				DFDA0FF529DC958000A9DBD0 /* RMEpisodeDetailViewController.swift in Sources */,
 				DF56B723299AC28A007F3DBA /* RMCharacter.swift in Sources */,
 				DF7EB96E29AE2E84003876D9 /* RMCharacterCollectionViewCellViewModel.swift in Sources */,
 				DF37EEF7299F878D00DB4756 /* RMRequest.swift in Sources */,
