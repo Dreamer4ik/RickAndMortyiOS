@@ -26,6 +26,15 @@ final class RMCharacterViewController: UIViewController {
         
         view.addSubview(characterListView)
         characterListView.addConstraintsToFillViewWithoutSafeArea(view)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(didTapSearch))
+    }
+    
+    // MARK: - Actions
+    @objc private func didTapSearch() {
+        let vc = RMSearchViewController(config: .init(type: .character))
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

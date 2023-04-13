@@ -10,6 +10,7 @@ import UIKit
 final class RMEpisodeDetailViewController: UIViewController {
     // MARK: - Properties
     private let viewModel: RMEpisodeDetailViewViewModel
+    private let detailView = RMEpisodeDetailView()
     
     // MARK: - Lifecycle
     init(url: URL?) {
@@ -29,9 +30,17 @@ final class RMEpisodeDetailViewController: UIViewController {
     // MARK: - Helpers
     private func configureUI() {
         title = "Episode"
-        view.backgroundColor = .tertiarySystemBackground
+        view.backgroundColor = .systemBackground
+        
+        view.addSubview(detailView)
+        detailView.addConstraintsToFillViewWithoutSafeArea(view)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapShare))
     }
     
     // MARK: - Actions
+    @objc private func didTapShare() {
+        
+    }
     
 }
