@@ -14,7 +14,7 @@ protocol RMEpisodeListViewViewModelDelegate: AnyObject {
 }
 
 
-/// View model to handle character list view logic
+/// View model to handle episodes list view logic
 final class RMEpisodeListViewViewModel: NSObject {
     
     weak var delegate: RMEpisodeListViewViewModelDelegate?
@@ -73,7 +73,7 @@ final class RMEpisodeListViewViewModel: NSObject {
     }
     
     /// Paginate if additional episodes are needed
-    public func fetchAdditionalCharacters(url: URL) {
+    public func fetchAdditionalEpisodes(url: URL) {
         guard !isLoadingMoreCharacters else {
             return
         }
@@ -194,7 +194,7 @@ extension RMEpisodeListViewViewModel: UIScrollViewDelegate {
             let totalScrollViewFixedHeight = scrollView.height
             
             if offset >= (totalContentHeight - totalScrollViewFixedHeight - 120) {
-                self?.fetchAdditionalCharacters(url: url)
+                self?.fetchAdditionalEpisodes(url: url)
             }
             
             timer.invalidate()
