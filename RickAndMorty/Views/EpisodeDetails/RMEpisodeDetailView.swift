@@ -141,10 +141,6 @@ extension RMEpisodeDetailView: UICollectionViewDelegate, UICollectionViewDataSou
             cell.configure(with: cellViewModel)
             return cell
         }
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .yellow
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -162,7 +158,7 @@ extension RMEpisodeDetailView: UICollectionViewDelegate, UICollectionViewDataSou
             break
         case .characters:
             guard let character = viewModel.character(at: indexPath.row) else {
-                return 
+                return
             }
             delegate?.rmEpisodeDetailView(self, didSelect: character)
         }
