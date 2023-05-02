@@ -7,11 +7,23 @@
 
 import UIKit
 
-struct Config {
+/// Configuration for search session
+struct SearchConfig {
     enum `Type` {
-        case character
-        case episode
-        case location
+        case character // name | status | gender
+        case episode // name
+        case location // name | type
+        
+        var title: String {
+            switch self {
+            case .character:
+                return "Search Characters"
+            case .episode:
+                return "Search Episode"
+            case .location:
+                return "Search Location"
+            }
+        }
     }
     let type: `Type`
 }
@@ -19,11 +31,14 @@ struct Config {
 /// Configurable controller to search
 final class RMSearchViewController: UIViewController {
     // MARK: - Properties
-    private let config: Config
+    private let viewModel: RMSearchViewViewModel
+    private let searchView: RMSearchView
     
     // MARK: - Lifecycle
-    init(config: Config) {
-        self.config = config
+    init(config: SearchConfig) {
+        let viewModel = RMSearchViewViewModel(config: config)
+        self.viewModel = viewModel
+        self.searchView = RMSearchView(frame: .zero, viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -38,10 +53,20 @@ final class RMSearchViewController: UIViewController {
     
     // MARK: - Helpers
     private func configureUI() {
-        title = "Search"
+        title = viewModel.config.type.title
         view.backgroundColor = .systemBackground
+        
+        view.addSubview(searchView)
+        searchView.addConstraintsToFillViewWithoutSafeArea(view)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Search",
+                                                            style: .done,
+                                                            target: self,
+                                                            action: #selector(didTapExecuteSearch))
     }
     
     // MARK: - Actions
-    
+    @objc private func didTapExecuteSearch() {
+        
+    }
 }
