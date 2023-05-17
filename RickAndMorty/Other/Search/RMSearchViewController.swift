@@ -51,12 +51,18 @@ final class RMSearchViewController: UIViewController {
         configureUI()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        searchView.presentKeyboard()
+    }
+    
     // MARK: - Helpers
     private func configureUI() {
         title = viewModel.config.type.title
         view.backgroundColor = .systemBackground
         
         view.addSubview(searchView)
+        searchView.delegate = self
         searchView.addConstraintsToFillViewWithoutSafeArea(view)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Search",
@@ -67,6 +73,20 @@ final class RMSearchViewController: UIViewController {
     
     // MARK: - Actions
     @objc private func didTapExecuteSearch() {
-        
+        viewModel.executeSearch()
+    }
+}
+
+// MARK: - RMSearchViewDelegate
+extension RMSearchViewController: RMSearchViewDelegate {
+    func rmSearchView(_ searchView: RMSearchView, didSelectOption option: RMSearchInputViewViewModel.DynamicOption) {
+        let vc = RMSearchOptionPickerViewController(option: option) { [weak self] selection in
+            DispatchQueue.main.async {
+                self?.viewModel.set(value: selection, for: option)
+            }
+        }
+        vc.sheetPresentationController?.detents = [.medium()]
+        vc.sheetPresentationController?.prefersGrabberVisible = true
+        present(vc, animated: true)
     }
 }
