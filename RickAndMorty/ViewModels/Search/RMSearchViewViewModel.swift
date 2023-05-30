@@ -14,9 +14,15 @@ import Foundation
 // - kick off API requests
 final class RMSearchViewViewModel {
     let config: SearchConfig
-    private var optionMapUpdateBlock: (((RMSearchInputViewViewModel.DynamicOption, String)) -> Void)?
     private var optionMap: [RMSearchInputViewViewModel.DynamicOption: String] = [:]
+    
+    private var optionMapUpdateBlock: (((RMSearchInputViewViewModel.DynamicOption, String)) -> Void)?
+    
     private var searchResultHandler: ((RMSearchResultViewModel) -> Void)?
+    
+    private var noResultsHandler: (() -> Void)?
+    
+    private var searchResultModel: Codable?
     
     private var searchText = ""
     
@@ -28,6 +34,10 @@ final class RMSearchViewViewModel {
     // MARK: - Public
     public func registerSearchResultHandler(_ block: @escaping (RMSearchResultViewModel) -> Void) {
         self.searchResultHandler = block
+    }
+    
+    public func registerNoResultsHandler(_ block: @escaping () -> Void) {
+        self.noResultsHandler = block
     }
     
     public func executeSearch() {
@@ -68,7 +78,7 @@ final class RMSearchViewViewModel {
             case .success(let model):
                 self?.processSearchResults(model: model)
             case .failure(let failure):
-                break
+                self?.handleNoResults()
             }
         }
     }
@@ -96,10 +106,17 @@ final class RMSearchViewViewModel {
         }
         
         if let results = resultVM {
+            self.searchResultModel = model
             self.searchResultHandler?(results)
         } else {
             // Error
+            handleNoResults()
         }
+    }
+    
+    private func handleNoResults() {
+        print("No results")
+        noResultsHandler?()
     }
     
     public func set(query text: String) {
@@ -116,5 +133,13 @@ final class RMSearchViewViewModel {
         _ block: @escaping ((RMSearchInputViewViewModel.DynamicOption, String)) -> Void
     ) {
         self.optionMapUpdateBlock = block
+    }
+    
+    public func locationSearchResult(at index: Int) -> RMLocation? {
+        guard let searchResultModel = searchResultModel as? RMGetAllLocationsResponse else {
+            return nil
+        }
+        
+        return searchResultModel.results[index]
     }
 }
