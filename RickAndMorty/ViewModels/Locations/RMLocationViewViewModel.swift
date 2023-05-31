@@ -12,7 +12,7 @@ protocol RMLocationViewViewModelDelegate: AnyObject {
 }
 
 final class RMLocationViewViewModel {
-    
+    // MARK: - Properties
     weak var delegate: RMLocationViewViewModelDelegate?
     private var locations: [RMLocation] = [] {
         didSet {
@@ -31,8 +31,70 @@ final class RMLocationViewViewModel {
     
     public private(set) var cellViewModels: [RMLocationTableViewCellViewModel] = []
     
+    public var shouldShowLoadMoreIndicator: Bool {
+        return apiInfo?.next != nil
+    }
+    
+    private var didFinishPagination: (() -> Void)?
+    
+    public var isLoadingMoreLocations = false
+    
+    // MARK: - Init
     init() {
         
+    }
+    
+    public func registerDidFinishPagination(_ block: @escaping () -> Void) {
+        self.didFinishPagination = block
+    }
+    
+    /// Paginate if additional locations are needed
+    public func fetchAdditionalLocations() {
+        guard !isLoadingMoreLocations else {
+            return
+        }
+        
+        guard let nextUrlString = apiInfo?.next,
+              let url = URL(string: nextUrlString) else {
+            return
+        }
+        
+        isLoadingMoreLocations = true
+        
+        guard let request = RMRequest(url: url) else {
+            isLoadingMoreLocations = false
+            print("Failed to create a request")
+            return
+        }
+        
+        RMService.shared.execute(
+            request,
+            expecting: RMGetAllLocationsResponse.self
+        ) { [weak self] result in
+            guard let strongSelf = self else {
+                return
+            }
+            switch result {
+            case .success(let responseModel):
+                let moreResults = responseModel.results
+                let info = responseModel.info
+                strongSelf.apiInfo = info
+                
+                strongSelf.cellViewModels.append(contentsOf: moreResults.compactMap({
+                    return RMLocationTableViewCellViewModel(location: $0)
+                }))
+                
+                DispatchQueue.main.async {
+                    strongSelf.isLoadingMoreLocations = false
+                    
+                    // Notify via callback
+                    strongSelf.didFinishPagination?()
+                }
+            case .failure(let failure):
+                print(failure.localizedDescription)
+                strongSelf.isLoadingMoreLocations = false
+            }
+        }
     }
     
     public func location(at index: Int) -> RMLocation? {
