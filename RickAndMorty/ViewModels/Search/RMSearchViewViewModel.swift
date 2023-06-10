@@ -41,6 +41,9 @@ final class RMSearchViewViewModel {
     }
     
     public func executeSearch() {
+        guard !searchText.trimmingCharacters(in: .whitespaces).isEmpty else {
+            return
+        }
         // Build arguments
         var queryParams: [URLQueryItem] = [
             URLQueryItem(name: "name", value: searchText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))
@@ -84,7 +87,8 @@ final class RMSearchViewViewModel {
     }
     
     private func processSearchResults(model: Codable) {
-        var resultVM: RMSearchResultViewModel?
+        var resultVM: RMSearchResultType?
+        var nextUrl: String?
         if let charactersResults = model as? RMGetAllCharactersResponse {
             resultVM = .characters(charactersResults.results.compactMap({
                 return RMCharacterCollectionViewCellViewModel(
@@ -93,21 +97,25 @@ final class RMSearchViewViewModel {
                     characterImageUrl: URL(string: $0.image)
                 )
             }))
+            nextUrl = charactersResults.info.next
         } else if let locationsResults = model as? RMGetAllLocationsResponse {
             resultVM = .locations(locationsResults.results.compactMap({
                 return RMLocationTableViewCellViewModel(location: $0)
             }))
+            nextUrl = locationsResults.info.next
         } else if let episodesResults = model as? RMGetAllEpisodesResponse {
             resultVM = .episodes(episodesResults.results.compactMap({
                 return RMCharacterEpisodeCollectionViewCellViewModel(
                     episodeDataUrl: URL(string: $0.url)
                 )
             }))
+            nextUrl = episodesResults.info.next
         }
         
         if let results = resultVM {
             self.searchResultModel = model
-            self.searchResultHandler?(results)
+            let vm = RMSearchResultViewModel(results: results, next: nextUrl)
+            self.searchResultHandler?(vm)
         } else {
             // Error
             handleNoResults()
