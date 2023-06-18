@@ -150,4 +150,20 @@ final class RMSearchViewViewModel {
         
         return searchResultModel.results[index]
     }
+    
+    public func characterSearchResult(at index: Int) -> RMCharacter? {
+        guard let searchResultModel = searchResultModel as? RMGetAllCharactersResponse else {
+            return nil
+        }
+        
+        return searchResultModel.results[index]
+    }
+    
+    public func episoderSearchResult(at index: Int) -> RMEpisode? {
+        guard let searchResultModel = searchResultModel as? RMGetAllEpisodesResponse else {
+            return nil
+        }
+        
+        return searchResultModel.results[index]
+    }
 }

@@ -119,3 +119,7 @@ extension UIView {
         return frame.size.width + frame.origin.x
     }
 }
+
+extension UIDevice {
+    static let isiPhone = UIDevice.current.userInterfaceIdiom == .phone
+}
